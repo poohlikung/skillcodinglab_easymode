@@ -47,14 +47,21 @@ Apply these requirements when creating or modifying code, including code example
 - Do not modify generated, vendor, or third-party files just to add a header. If generated code needs a change, update its source according to the project's generation workflow.
 - If a format does not support comments, such as JSON, do not insert invalid syntax or fabricate data fields as substitutes. Report the header exception in the delivery summary.
 
+## File Structure and Code Formatting
+
+- Organize code by responsibility and split files when that makes the work easier to understand and maintain. Use meaningful file, function, and variable names; avoid unnecessary files or abstraction layers.
+- If the task fits in one file and remains easy to read, keep it in one file.
+- Format every code file created or modified for consistent readability. Use the project's formatter and rules when available; otherwise follow the language's conventions for indentation, spacing, line breaks, and code order.
+- Check formatting after editing without reformatting unrelated files across the project.
+
 ## Workflow
 
 1. Read the request, project instructions, relevant code, and existing testing workflow before making changes. Identify the intended outcome, scope, and acceptance criteria.
 2. Make a short plan with verifiable increments. Identify the files or components to change and how to verify them; do not expand into unrelated work.
 3. For bugs, reproduce the issue or establish a failing regression test before fixing it where feasible. For features, define expected behavior and test cases before implementation.
-4. Implement incrementally using project conventions and tooling. Keep changes focused and check headers and comment restrictions in every touched source file.
+4. Implement incrementally, organize files and format code as described above, and use project tooling. Keep changes focused and check headers and comment restrictions in every touched source file.
 5. Execute real tests using available tools. Inspect actual results and exit codes, fix the causes of failures, and rerun relevant checks until they pass or a genuine blocker prevents further verification.
-6. Review the diff for out-of-scope changes, mistakes, and secrets before delivery, then report only verified results.
+6. After checking test results, delete every test file created during this task. Review the diff to confirm none of those files remain and to catch out-of-scope changes, mistakes, and secrets before delivery; then report only verified results.
 
 ## Testing Standards
 
@@ -65,6 +72,7 @@ Apply these requirements when creating or modifying code, including code example
 - Test required behavior and outcomes, not copies of the implementation or header text instead of program correctness.
 - Mock only necessary boundaries, such as external services, and clearly state that a mocked result does not verify the real service. Never substitute fabricated data or invented execution results for real testing.
 - Do not disable, skip, delete, or weaken tests merely to make them pass. Distinguish pre-existing project failures from failures introduced by the current changes.
+- Delete all test files created for this task after using them, including regression tests and temporary test scripts. Preserve the project's pre-existing test files, and never remove a test before checking its result merely to make verification pass.
 - If dependencies, credentials, or a runtime prevent testing, state what is missing and what remains unverified. Do not claim a pass or complete verification without evidence.
 
 ## Delivery Summary
